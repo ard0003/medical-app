@@ -1,0 +1,132 @@
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+     
+  header {
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    width:100%;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Style for the project name/logo */
+header .logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #0073e6;
+    
+    margin-right: auto;     /* Pushes the menu items to the right */
+    padding-left: 15px;     /* Adds some padding to the left */
+}
+
+  .menu-item {
+    margin: 0 15px;
+    color: #333;
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+  } 
+  
+  body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-image: url('doctor.jpg'); /* Stethoscope background image */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    overflow-y: scroll;
+    color: #333;
+  }
+  
+
+  /* Content container */
+  .content {
+    background-image: url('imageBG.jpg');  padding: 40px;
+    background-size:auto;         /* Makes the image cover the entire viewport */
+  
+   width: 100vh;
+    max-height:500px;
+    text-align: left;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  
+  /* Text styling */
+  .content h1 {
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .content h1 span {
+    color: #0073e6;
+    font-weight: bold;
+  }
+  
+  select {
+    width: 300px;           /* Makes the dropdown wider */
+    height: 200px;           /* Increases the height when closed */
+    font-size: 18px;        /* Larger font size for options */
+    padding: 5px;
+    overflow-y: auto;       /* Allows vertical scroll */
+  }
+  
+  /* Dropdown with a fixed max-height */
+  select option {
+    padding: 10px;          /* Adds padding to make options larger */
+  }
+
+  .predict{
+    width: 100%;
+    border-radius: 20px;
+    margin-block: 50px;
+    padding-inline: 15px;
+    background-color: #007bff76;
+    height: 5vh;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .result {
+    margin-top: 30px;
+    padding: 20px;
+    border: 2px solid #0073e6;
+    border-radius: 8px;
+    background-color: #f0f8ff;
+    color: #333;
+    text-align: center;
+}
+
+#about h2, #contact h2,#developer h2,#blog h2 {
+    font-size: 28px;
+    color: #0073e6;
+    margin-bottom: 10px;
+}
+
+#about p, #contact p,#developer p,#blog p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+html {
+    scroll-behavior: smooth;
+}
