@@ -1,45 +1,76 @@
-// Function to handle menu clicks and show the respective section
-document.querySelectorAll('.menu-item').forEach(menuItem => {
-    menuItem.addEventListener('click', function (e) {
-        e.preventDefault(); // Prevent default anchor behavior
+// Populate symptoms dropdown
+document.addEventListener("DOMContentLoaded", () => {
+  const symptomSelect = document.getElementById("symptom-select");
+  const warning = document.getElementById("selection-warning");
 
-        // Get the text content of the clicked menu item
-        const sectionId = this.textContent.toLowerCase();
-
-        // Hide all sections
-        document.querySelectorAll('.container').forEach(section => {
-            section.style.display = 'none';
+  // Fetch symptoms from the backend and populate the dropdown
+  fetch("http://127.0.0.1:5000/get-symptoms")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.symptoms) {
+        data.symptoms.forEach((symptom) => {
+          const option = document.createElement("option");
+          option.value = symptom;
+          option.textContent = symptom;
+          symptomSelect.appendChild(option);
         });
+      } else {
+        console.error("Failed to fetch symptoms:", data.error);
+      }
+    })
+    .catch((error) => console.error("Error fetching symptoms:", error));
 
-        // If Home is clicked, show the Home section and reset the result section
-        if (sectionId === 'home') {
-            const homeSection = document.getElementById('Home');
-            homeSection.style.display = 'block';
+  // Restrict selection to 4 symptoms
+  symptomSelect.addEventListener("change", () => {
+    const selectedOptions = Array.from(symptomSelect.selectedOptions);
 
-            const resultDiv = document.getElementById('result');
-            resultDiv.style.display = 'none';  // Keep result hidden when coming back to Home
-            resultDiv.textContent = '';  // Clear any previous result text
-        } else {
-            // For About and Contact, show those sections
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-            }
-        }
-    });
+    if (selectedOptions.length > 4) {
+      warning.style.display = "block";
+      // Deselect the last selected option (to limit to 4)
+      selectedOptions[selectedOptions.length - 1].selected = false;
+    } else {
+      warning.style.display = "none";
+    }
+  });
 });
 
-// Function to handle Predict button click
-document.getElementById('predict-btn').addEventListener('click', function () {
-    const selectedOptions = Array.from(document.querySelector('select').selectedOptions)
-        .map(option => option.text)
-        .join(', ');
+// Handle form submission
+document.getElementById("predict-btn").addEventListener("click", () => {
+  const symptomSelect = document.getElementById("symptom-select");
+  symptomSelect.setAttribute("multiple", "true");
+  const selectedSymptoms = Array.from(symptomSelect.selectedOptions).map(
+    (option) => option.value
+  );
+  console.log(selectedSymptoms);
+  // Validate selection count
+  if (selectedSymptoms.length !== 4) {
+    alert("Please select exactly 4 symptoms.");
+    return;
+  }
 
-    const resultDiv = document.getElementById('result');
-    if (selectedOptions) {
-        resultDiv.textContent = `You have selected: ${selectedOptions}`;
-    } else {
-        resultDiv.textContent = 'Please select at least one symptom.';
-    }
-    resultDiv.style.display = 'block';  // Display the result section
+  // Send symptoms to backend
+  fetch("http://127.0.0.1:5000/predict-disease", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ symptoms: selectedSymptoms }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const resultDiv = document.getElementById("result");
+      if (data.disease) {
+        resultDiv.innerHTML = `
+            <p><strong>Disease:</strong> ${data.disease}</p>
+            <p><strong>Specialist:</strong> ${data.specialist}</p>
+          `;
+      } else {
+        resultDiv.innerHTML = `<p><strong>Error:</strong> ${data.error}</p>`;
+      }
+    })
+    .catch((error) => {
+      console.error("Error during prediction:", error);
+      document.getElementById("result").innerHTML =
+        "<p>An error occurred while processing your request.</p>";
+    });
 });

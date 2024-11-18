@@ -75,7 +75,8 @@ header .logo {
     height: 200px;           /* Increases the height when closed */
     font-size: 18px;        /* Larger font size for options */
     padding: 5px;
-    overflow-y: auto;       /* Allows vertical scroll */
+    overflow-y: auto;  
+    appearance: none;     /* Allows vertical scroll */
   }
   
   /* Dropdown with a fixed max-height */

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medy - Tell Us Your Problem</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <span class="logo">VITALCURE</span>
+
+      <a href="#" class="menu-item">Home</a>
+      <a href="#" class="menu-item">About</a>
+      <a href="#" class="menu-item">Contact</a>
+      <a href="#" class="menu-item">Developer</a>
+      <a href="#" class="menu-item">Blog</a>
+    </header>
+
+    <div class="container" id="Home">
+      <div class="content">
+        <h1>Tell Us <span>Your Problem!</span></h1>
+        <p>
+          Describe your health issues and get the best guidance and
+          recommendations from our specialists.
+        </p>
+
+        <h3>Select Your Symptoms (Select exactly 4):</h3>
+        <div class="options">
+          <!-- Dropdown populated dynamically by JavaScript -->
+          <select multiple="multiple" id="symptom-select" size="8">
+            <!-- Options will be inserted here by JavaScript -->
+          </select>
+          <p id="selection-warning" style="color: red; display: none">
+            You can select only 4 symptoms.
+          </p>
+        </div>
+      </div>
+
+      <button class="predict" id="predict-btn">Predict</button>
+
+      <div id="result" class="result">
+        <!-- Result will be displayed here -->
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="container" id="about" style="display: none">
+      <h2>About Us</h2>
+      <p>
+        Welcome to Medy! Our platform is dedicated to helping you address your
+        health concerns. We connect you with specialists who provide
+        personalized recommendations based on your symptoms. With Medy, you are
+        never alone in your health journey.
+      </p>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="container" id="contact" style="display: none">
+      <h2>Contact Us</h2>
+      <p>
+        We'd love to hear from you! For inquiries, feedback, or support, feel
+        free to reach out.
+        <br />Email: <a href="mailto:support@medy.com">support@medy.com</a>
+        <br />Phone: +1 234-567-890
+      </p>
+    </div>
+
+    <div class="container" id="blog" style="display: none">
+      <h2>Blog</h2>
+      <p>
+        Welcome to the VitalCure Blog! Here, we share the latest articles, news,
+        and insights on healthcare, wellness, and technology. Our goal is to
+        keep you informed about the latest trends in the healthcare industry, as
+        well as tips and advice on how to lead a healthier life. Whether you're
+        looking for information on managing health conditions or the latest
+        healthcare innovations, you'll find useful resources right here.
+      </p>
+    </div>
+
+    <div class="container" id="developer" style="display: none">
+      <h2>Developer</h2>
+      <p>
+        VitalCure was developed by a dedicated team of software engineers and
+        health experts, with the goal of making healthcare more accessible and
+        efficient. The platform uses modern web technologies to provide users
+        with an intuitive experience in diagnosing health symptoms and
+        connecting with specialists. Our development team is continuously
+        working to improve the platform and add new features to help you get the
+        best healthcare recommendations at your fingertips.
+      </p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
